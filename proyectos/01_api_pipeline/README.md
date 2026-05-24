@@ -77,6 +77,22 @@ cd "C:\Users\Sandro\Documents\New project\proyectos\01_api_pipeline"
 python src\main.py
 ```
 
+## Como Ver Los Resultados
+
+Opcion 1: con el script de consola:
+
+```powershell
+python src\view_results.py
+```
+
+Opcion 2: abrir la base con una app compatible con SQLite:
+
+```text
+database/warehouse.db
+```
+
+Nota: MySQL Workbench no abre bases SQLite directamente. MySQL y SQLite usan SQL, pero son motores diferentes.
+
 ## API Elegida
 
 Usaremos CoinGecko `simple/price`, porque permite consultar varias criptomonedas por ID y pedir campos utiles como precio, market cap, volumen 24h, cambio 24h y fecha de actualizacion.
