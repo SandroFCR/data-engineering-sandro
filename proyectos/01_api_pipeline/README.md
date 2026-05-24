@@ -62,3 +62,50 @@ Elegir la fuente de datos y escribir una explicacion corta:
 Voy a trabajar con datos de ______ porque quiero analizar ______.
 ```
 
+Respuesta:
+
+```text
+Voy a trabajar con datos de criptomonedas porque quiero analizar precios, volumen, capitalizacion de mercado y variacion de 24 horas.
+```
+
+## Como Ejecutar El Pipeline
+
+Desde la carpeta del proyecto:
+
+```powershell
+cd "C:\Users\Sandro\Documents\New project\proyectos\01_api_pipeline"
+python src\main.py
+```
+
+## API Elegida
+
+Usaremos CoinGecko `simple/price`, porque permite consultar varias criptomonedas por ID y pedir campos utiles como precio, market cap, volumen 24h, cambio 24h y fecha de actualizacion.
+
+Criptomonedas iniciales:
+
+- bitcoin
+- ethereum
+- solana
+- cardano
+- ripple
+
+## Mini Clase
+
+En este pipeline:
+
+- `extract.py` trae datos desde internet y guarda el JSON original.
+- `transform.py` convierte el JSON en una tabla CSV.
+- `load.py` carga la tabla a SQLite.
+- `main.py` ejecuta todo en orden.
+
+Regla importante: en Ingenieria de Datos casi siempre guardamos primero el dato raw. Asi podemos auditar, reprocesar y corregir transformaciones sin volver a pedir los datos.
+
+## Reto Para Sandro
+
+Despues de ejecutar el pipeline, abre `sql/analysis.sql` y responde:
+
+```text
+1. Cual cripto tiene mayor market cap?
+2. Cual tuvo mayor cambio positivo en 24h?
+3. Que columna representa el momento en que extrajimos los datos?
+```
