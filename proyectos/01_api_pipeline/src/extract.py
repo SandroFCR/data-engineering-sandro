@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 
 
 API_URL = "https://api.coingecko.com/api/v3/simple/price"
-COIN_IDS = ["bitcoin", "ethereum", "solana", "cardano", "ripple"]
+COIN_IDS = ["bitcoin", "ethereum", "solana", "cardano", "ripple", "dogecoin"]
 VS_CURRENCY = "usd"
 
 
