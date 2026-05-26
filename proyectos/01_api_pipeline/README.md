@@ -85,7 +85,13 @@ Opcion 1: con el script de consola:
 python src\view_results.py
 ```
 
-Opcion 2: abrir la base con una app compatible con SQLite:
+Opcion 2: ejecutar las consultas SQL de analisis:
+
+```powershell
+python src\run_analysis.py
+```
+
+Opcion 3: abrir la base con una app compatible con SQLite:
 
 ```text
 database/warehouse.db

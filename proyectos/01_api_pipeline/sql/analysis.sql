@@ -2,6 +2,10 @@
 SELECT COUNT(*) AS total_rows
 FROM crypto_prices;
 
+-- Total extraction snapshots
+SELECT COUNT(DISTINCT extracted_at_utc) AS total_snapshots
+FROM crypto_prices;
+
 -- Latest snapshot by extraction time
 SELECT
     coin_id,
@@ -27,4 +31,3 @@ WHERE extracted_at_utc = (
 )
 ORDER BY change_24h_pct DESC
 LIMIT 1;
-
