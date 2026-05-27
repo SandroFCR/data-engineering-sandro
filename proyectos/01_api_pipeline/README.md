@@ -91,7 +91,13 @@ Opcion 2: ejecutar las consultas SQL de analisis:
 python src\run_analysis.py
 ```
 
-Opcion 3: abrir la base con una app compatible con SQLite:
+Opcion 3: ejecutar validaciones de calidad:
+
+```powershell
+python src\validate.py
+```
+
+Opcion 4: abrir la base con una app compatible con SQLite:
 
 ```text
 database/warehouse.db

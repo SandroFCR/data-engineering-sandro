@@ -15,6 +15,7 @@ Meta: aprender Ingenieria de Datos de forma practica, dinamica y orientada a con
 - Empezamos con el Proyecto 01: pipeline ETL desde una API publica.
 - Elegimos criptomonedas como primer dominio.
 - Creamos scripts de extraccion, transformacion y carga.
+- Agregamos analisis SQL y validaciones de calidad de datos.
 
 ## Dudas
 
@@ -25,3 +26,5 @@ Meta: aprender Ingenieria de Datos de forma practica, dinamica y orientada a con
 - Workspace inicial creado.
 - Proyecto sincronizado con GitHub.
 - Primer pipeline cripto estructurado.
+- Primeras consultas SQL de analisis.
+- Primeras reglas de data quality.
