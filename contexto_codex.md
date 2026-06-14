@@ -4,7 +4,8 @@
 
 Nombre: Sandro
 
-Objetivo: aprender Ingenieria de Datos de forma practica, dinamica y eficiente, con proyectos reales orientados a conseguir un primer trabajo trainee/junior.
+Objetivo: aprender Ingenieria de Datos de forma practica, dinamica y eficiente,
+con proyectos reales orientados a conseguir un primer trabajo trainee/junior.
 
 ## Metodo De Trabajo
 
@@ -27,9 +28,20 @@ Codex debe actuar como mentor practico:
 6. Cloud y orquestacion.
 7. Portafolio, entrevistas y postulaciones.
 
+## Organizacion Del Repositorio
+
+- `clases/`: notas, dinamicas y practicas guiadas.
+- `proyectos/`: proyectos presentables para GitHub, CV y entrevistas.
+
 ## Proyecto Actual
 
-Proyecto 01: pipeline ETL de criptomonedas.
+Proyecto 01: Crypto ETL Pipeline.
+
+Ruta:
+
+```text
+proyectos/01_crypto_etl_pipeline/
+```
 
 Flujo esperado:
 
@@ -37,22 +49,11 @@ Flujo esperado:
 API cripto -> JSON raw -> limpieza con Python -> base de datos -> consultas SQL -> reporte
 ```
 
-## Siguiente Paso
-
-Empezar el pipeline cripto:
-
-1. Elegir API publica.
-2. Crear script `extract.py`.
-3. Guardar datos raw en `data/raw/`.
-4. Transformar datos en tabla.
-5. Cargar a SQLite.
-
 ## Regla De Aprendizaje
 
 No avanzar solo copiando codigo. Cada bloque debe incluir:
 
-- Que estamos haciendo.
-- Por que se hace asi.
-- Que error comun podria pasar.
-- Mini reto para Sandro.
-
+- que estamos haciendo;
+- por que se hace asi;
+- que error comun podria pasar;
+- mini reto para Sandro.

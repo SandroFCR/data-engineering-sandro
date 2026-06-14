@@ -26,6 +26,24 @@ CHECKS = [
         "message": "price_usd must be positive.",
     },
     {
+        "name": "market_cap_usd_positive",
+        "sql": "SELECT COUNT(*) FROM crypto_prices WHERE market_cap_usd IS NULL OR market_cap_usd <= 0;",
+        "passes": lambda value: value == 0,
+        "message": "market_cap_usd must be positive.",
+    },
+    {
+        "name": "volume_24h_usd_not_negative",
+        "sql": "SELECT COUNT(*) FROM crypto_prices WHERE volume_24h_usd IS NULL OR volume_24h_usd < 0;",
+        "passes": lambda value: value == 0,
+        "message": "volume_24h_usd cannot be negative.",
+    },
+    {
+        "name": "extracted_at_utc_not_null",
+        "sql": "SELECT COUNT(*) FROM crypto_prices WHERE extracted_at_utc IS NULL OR extracted_at_utc = '';",
+        "passes": lambda value: value == 0,
+        "message": "extracted_at_utc cannot be empty.",
+    },
+    {
         "name": "no_duplicate_coin_snapshot",
         "sql": """
             SELECT COUNT(*)
@@ -71,4 +89,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

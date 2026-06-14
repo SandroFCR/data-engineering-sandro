@@ -88,4 +88,3 @@ Entrega: portafolio con 2 o 3 proyectos fuertes.
 - Mes 4 a 5: PySpark y Databricks.
 - Mes 6: primer portafolio y postulaciones iniciales.
 - Mes 7 a 9: proyectos mas fuertes, entrevistas y mejora continua.
-

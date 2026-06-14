@@ -1,12 +1,29 @@
-# Ruta Data Engineering - Sandro
+# Data Engineering Learning Lab - Sandro Cusihuaman
 
-Este workspace sera tu laboratorio de Ingenieria de Datos.
+Repositorio personal de estudio, practica guiada y seguimiento de la ruta de
+Ingenieria de Datos.
 
-La regla principal: aprender construyendo. Cada bloque tendra una explicacion corta, una practica guiada, un reto y una entrega para portafolio.
+Este repositorio conserva el contexto de aprendizaje: clases, ruta, bitacora,
+retos, notas y versiones de trabajo. Los proyectos presentables para CV/GitHub
+se separan en un repositorio limpio de portafolio.
 
-## Objetivo
+## Contenido
 
-Prepararte para postular a roles trainee/junior de datos en 6 a 9 meses, con proyectos reales y GitHub presentable.
+- [Ruta de aprendizaje](ruta_aprendizaje.md)
+- [Bitacora](bitacora.md)
+- [Contexto para Codex](contexto_codex.md)
+- [Clases y practicas](clases/)
+- [Proyectos de aprendizaje](proyectos/)
+
+## Repositorio profesional de proyectos
+
+Los entregables limpios estan separados en:
+
+```text
+C:\Users\Sandro\Documents\data-engineering-projects
+```
+
+Ese repo debe usarse para CV, entrevistas y GitHub publico de proyectos.
 
 ## Metodo
 
@@ -15,22 +32,4 @@ Prepararte para postular a roles trainee/junior de datos en 6 a 9 meses, con pro
 3. Resolver un reto practico.
 4. Revisar errores y mejoras.
 5. Documentar lo aprendido.
-6. Convertirlo en pieza de portafolio.
-
-## Primer proyecto
-
-Proyecto 01: pipeline ETL desde una API publica.
-
-Flujo:
-
-```text
-API -> JSON raw -> limpieza con Python -> SQLite/PostgreSQL -> consultas SQL -> reporte
-```
-
-## Estructura
-
-- `ruta_aprendizaje.md`: malla completa de estudio.
-- `bitacora.md`: registro de avances, dudas y logros.
-- `semana_01/`: primera semana de fundamentos.
-- `proyectos/01_api_pipeline/`: primer proyecto real.
-
+6. Convertir los mejores avances en proyectos presentables.
