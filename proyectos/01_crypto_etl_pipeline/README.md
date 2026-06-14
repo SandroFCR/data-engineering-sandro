@@ -31,6 +31,38 @@ Este proyecto demuestra fundamentos importantes para un rol trainee/junior de Da
 
 ## Arquitectura
 
+Flujo del pipeline:
+
+```text
+CoinGecko API
+    |
+    v
+extract.py
+    |
+    v
+data/raw/*.json
+    |
+    v
+transform.py
+    |
+    v
+data/processed/*.csv
+    |
+    v
+load.py
+    |
+    v
+database/warehouse.db
+    |
+    +--> run_analysis.py
+    |
+    +--> validate.py
+    |
+    +--> view_results.py
+```
+
+Estructura del proyecto:
+
 ```text
 src/
   extract.py       -> obtiene datos desde CoinGecko API y guarda JSON raw
@@ -51,6 +83,30 @@ database/
 sql/
   analysis.sql     -> consultas SQL del proyecto
 ```
+
+## Decisiones Tecnicas
+
+### Guardar datos raw
+
+Primero se guarda la respuesta original de la API en `data/raw/`. Esto permite auditar los datos recibidos y reprocesarlos si una transformacion necesita corregirse.
+
+### Separar extract, transform y load
+
+Cada archivo tiene una responsabilidad clara:
+
+- `extract.py`: extraer datos;
+- `transform.py`: dar forma tabular;
+- `load.py`: cargar a base de datos.
+
+Esto facilita mantenimiento, pruebas y debugging.
+
+### Usar SQLite al inicio
+
+SQLite permite practicar SQL y carga de datos sin configurar un servidor. Es una buena primera base antes de migrar a PostgreSQL.
+
+### Validar antes de confiar
+
+El pipeline incluye reglas de calidad para detectar datos vacios, metricas invalidas o duplicados antes de usar los resultados para analisis.
 
 ## Datos
 
@@ -122,9 +178,34 @@ El script `src/validate.py` valida:
 - `extracted_at_utc` no esta vacio;
 - no existen duplicados por `coin_id` y `extracted_at_utc`.
 
+## Como Explicarlo En Entrevista
+
+```text
+Construí un pipeline ETL modular para datos de criptomonedas. El pipeline extrae precios desde la API de CoinGecko, guarda la respuesta raw en JSON, transforma los datos a un CSV tabular y los carga en SQLite. Luego ejecuta consultas SQL de análisis y validaciones de calidad para revisar nulos, métricas inválidas y duplicados por snapshot.
+```
+
+Preguntas que este proyecto ayuda a responder:
+
+- Como consumes datos desde una API?
+- Por que guardarias datos raw?
+- Como conviertes JSON en una estructura tabular?
+- Como cargas datos a una base?
+- Como evitas duplicados?
+- Como validas calidad de datos?
+- Como organizas un pipeline ETL por modulos?
+
 ## Aprendizajes principales
 
 - En Ingenieria de Datos conviene guardar primero el dato raw para auditoria y reproceso.
 - Separar extraccion, transformacion y carga mejora mantenimiento y lectura del pipeline.
 - SQL sigue siendo clave para validar y entender los datos despues de cargarlos.
 - Las reglas de calidad ayudan a detectar errores antes de confiar en los resultados.
+
+## Proximas Mejoras
+
+- Migrar la carga de SQLite a PostgreSQL.
+- Agregar Docker para levantar la base de datos.
+- Agregar variables de entorno para configuracion.
+- Agregar logs estructurados.
+- Crear modelos analiticos con dbt.
+- Construir una version Lakehouse con Databricks, PySpark y Delta Lake.
