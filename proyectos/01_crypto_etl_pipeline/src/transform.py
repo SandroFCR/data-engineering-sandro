@@ -1,4 +1,4 @@
-"""Transform raw CoinGecko JSON into a tabular CSV file."""
+"""Transform raw CoinGecko JSON into tabular CSV and Parquet files."""
 
 from __future__ import annotations
 
@@ -6,6 +6,8 @@ import csv
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+
+import pandas as pd
 
 
 FIELDNAMES = [
@@ -67,6 +69,15 @@ def save_processed_csv(rows: list[dict], output_dir: Path) -> Path:
     return output_path
 
 
+def save_processed_parquet(rows: list[dict], output_dir: Path, extracted_at: str) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / f"crypto_prices_{extracted_at}.parquet"
+
+    dataframe = pd.DataFrame(rows, columns=FIELDNAMES)
+    dataframe.to_parquet(output_path, index=False)
+    return output_path
+
+
 def main(raw_path: Path | None = None) -> Path:
     project_dir = Path(__file__).resolve().parents[1]
     raw_dir = project_dir / "data" / "raw"
@@ -75,10 +86,15 @@ def main(raw_path: Path | None = None) -> Path:
     selected_raw_path = raw_path or find_latest_raw_file(raw_dir)
     rows = transform_payload(selected_raw_path)
     output_path = save_processed_csv(rows, processed_dir)
+    parquet_path = save_processed_parquet(
+        rows,
+        processed_dir,
+        output_path.stem.replace("crypto_prices_", ""),
+    )
     print(f"Processed data saved: {output_path}")
+    print(f"Parquet data saved: {parquet_path}")
     return output_path
 
 
 if __name__ == "__main__":
     main()
-

@@ -7,7 +7,7 @@ Pipeline ETL de criptomonedas construido como primer proyecto de portafolio en I
 Construir un flujo de datos end-to-end:
 
 ```text
-CoinGecko API -> JSON raw -> CSV procesado -> SQLite -> consultas SQL -> validaciones de calidad
+CoinGecko API -> JSON raw -> CSV/Parquet procesado -> SQLite/DuckDB -> consultas SQL -> validaciones de calidad
 ```
 
 Este proyecto demuestra fundamentos importantes para un rol trainee/junior de Data Engineering:
@@ -25,6 +25,8 @@ Este proyecto demuestra fundamentos importantes para un rol trainee/junior de Da
 - Python
 - SQL
 - SQLite
+- DuckDB
+- Parquet
 - CoinGecko API
 - JSON / CSV
 - Git y GitHub
@@ -47,6 +49,7 @@ transform.py
     |
     v
 data/processed/*.csv
+data/processed/*.parquet
     |
     v
 load.py
@@ -59,6 +62,8 @@ database/warehouse.db
     +--> validate.py
     |
     +--> view_results.py
+    |
+    +--> run_duckdb_analysis.py sobre Parquet
 ```
 
 Estructura del proyecto:
@@ -70,12 +75,13 @@ src/
   load.py          -> carga CSV procesado en SQLite
   main.py          -> ejecuta el pipeline completo
   run_analysis.py  -> ejecuta consultas SQL de analisis
+  run_duckdb_analysis.py -> consulta archivos Parquet con DuckDB
   validate.py      -> ejecuta reglas de calidad de datos
   view_results.py  -> muestra resultados desde consola
 
 data/
   raw/             -> datos originales de la API
-  processed/       -> datos procesados en CSV
+  processed/       -> datos procesados en CSV y Parquet
 
 database/
   warehouse.db     -> base SQLite local
@@ -103,6 +109,12 @@ Esto facilita mantenimiento, pruebas y debugging.
 ### Usar SQLite al inicio
 
 SQLite permite practicar SQL y carga de datos sin configurar un servidor. Es una buena primera base antes de migrar a PostgreSQL.
+
+### Agregar Parquet y DuckDB
+
+Parquet es un formato columnar usado en data lakes y plataformas modernas como Databricks. DuckDB permite consultar archivos Parquet directamente con SQL sin levantar un servidor.
+
+En este proyecto, el CSV sigue siendo util para aprender el flujo tabular, mientras que Parquet prepara el camino hacia Lakehouse y Databricks.
 
 ### Validar antes de confiar
 
@@ -150,6 +162,12 @@ Para ejecutar analisis SQL:
 python src\run_analysis.py
 ```
 
+Para ejecutar analisis moderno sobre Parquet con DuckDB:
+
+```powershell
+python src\run_duckdb_analysis.py
+```
+
 Para ejecutar validaciones de calidad:
 
 ```powershell
@@ -181,7 +199,7 @@ El script `src/validate.py` valida:
 ## Como Explicarlo En Entrevista
 
 ```text
-Construí un pipeline ETL modular para datos de criptomonedas. El pipeline extrae precios desde la API de CoinGecko, guarda la respuesta raw en JSON, transforma los datos a un CSV tabular y los carga en SQLite. Luego ejecuta consultas SQL de análisis y validaciones de calidad para revisar nulos, métricas inválidas y duplicados por snapshot.
+Construi un pipeline ETL modular para datos de criptomonedas. El pipeline extrae precios desde la API de CoinGecko, guarda la respuesta raw en JSON, transforma los datos a CSV y Parquet, y los carga en SQLite. Tambien ejecuta analisis con DuckDB sobre Parquet, consultas SQL y validaciones de calidad para revisar nulos, metricas invalidas y duplicados por snapshot.
 ```
 
 Preguntas que este proyecto ayuda a responder:
@@ -190,6 +208,8 @@ Preguntas que este proyecto ayuda a responder:
 - Por que guardarias datos raw?
 - Como conviertes JSON en una estructura tabular?
 - Como cargas datos a una base?
+- Por que usar Parquet en proyectos modernos?
+- Como consultar archivos Parquet con DuckDB?
 - Como evitas duplicados?
 - Como validas calidad de datos?
 - Como organizas un pipeline ETL por modulos?
@@ -203,6 +223,7 @@ Preguntas que este proyecto ayuda a responder:
 
 ## Proximas Mejoras
 
+- Agregar una capa `analytics/` con consultas DuckDB reutilizables.
 - Migrar la carga de SQLite a PostgreSQL.
 - Agregar Docker para levantar la base de datos.
 - Agregar variables de entorno para configuracion.
